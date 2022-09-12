@@ -1,0 +1,24 @@
+{
+  "name": "space-zero-app",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sachithprabhashana/space-zero-app.git"
+  },
+  "author": "prabhashana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/sachithprabhashana/space-zero-app/issues"
+  },
+  "homepage": "https://gitlab.com/sachithprabhashana/space-zero-app#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.5.3",
+    "nodemon": "^2.0.19"
+  }
+}
