@@ -3,7 +3,7 @@ import { message } from 'antd';
 
 export const bookCar = (reqObj) => async (dispatch) => {
 
-    dispatch({type: 'LOADING', payload:true})
+    dispatch({type: 'LOADING', payload:false})
 
     try{
          await axios.post('/api/bookings/bookcar' , reqObj)
@@ -11,7 +11,7 @@ export const bookCar = (reqObj) => async (dispatch) => {
         message.success('Your car booked successfully')
     } catch (error){
         console.log(error);
-        dispatch({type: 'LOADING', payload:true})
-        message.error('Something went wrong..Please try later')
+        dispatch({type: 'LOADING', payload:false})
+        message.error('Something went wrong..Please try laters')
     }
 }

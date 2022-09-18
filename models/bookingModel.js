@@ -12,7 +12,7 @@ const bookingSchema = new mongoose.Schema({
     bookedTimeSlots : {
         from : {type : String},
         to : {type : String}
-    }
+    } ,
 },
     {timestamps : true}
 )

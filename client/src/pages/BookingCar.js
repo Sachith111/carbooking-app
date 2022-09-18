@@ -1,4 +1,4 @@
-import { Col, Row, Divider, DatePicker, Checkbox, Button } from 'antd';
+import { Col, Row, Divider, DatePicker, Checkbox, Button, Modal } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { DefaultLayout } from '../components/DefaultLayout'
 import { Spinner } from '../components/Spinner';
 import { bookCar } from '../redux/actions/bookingActions';
 import { getAllCars } from '../redux/actions/carsAction';
+import StripeCheckout from 'react-stripe-checkout';
 
 const { RangePicker } = DatePicker;
 export const BookingCar = () => {
@@ -20,6 +21,7 @@ export const BookingCar = () => {
   const [totalHours,setTotalHours] = useState(0);
   const [driver,setDriver] = useState(false);
   const [totalAmount,setTotalAmount] = useState(0);
+  const [modal2Open, setModal2Open] = useState(false);
 
   useEffect(() => {
    
@@ -52,20 +54,22 @@ function selectTimeSlots(values){
     setTotalHours(values[1].diff(values[0] , 'hours') );
 }
 
-function bookNow(){
+function onToken(token){
   const reqObj = {
+    token,
     user : JSON.parse(localStorage.getItem('user'))._id,
     car : car._id,
     totalHours,
     totalAmount,
     driverRequired : driver ,
-    bookedTimeShots : {
+    bookedTimeSlots : {
       from,
       to
     } ,
   }
   dispatch(bookCar(reqObj));
 }
+
 
   return (
     <DefaultLayout> 
@@ -92,24 +96,62 @@ function bookNow(){
         <Divider type='horizontal' plain>Select Time Slots</Divider>
         <div className='text-right'>
         <RangePicker showTime={{format: 'HH:mm'}} format='MMM DD YYYY HH:mm' onChange={selectTimeSlots}/>
-        <div>
-          <p>Total Hours : {totalHours}</p>
-          <p>Rent Per Hour : <b>{car.rentPerHour}</b></p>
-          <Checkbox onChange={(e)=>{
-            if(e.target.checked){
-              setDriver(true);
-            }else{ 
-              setDriver(false);
-            }
-          }}>Driver Required</Checkbox>
-          <p><b>Total Amount : {totalAmount}</b></p>
+        <br />
+       <Button className='btn1 mt-2 '  onClick={() => setModal2Open(true)}>See Booked Slots</Button>
+       
+       {/* condition */}
+       {from && to &&(
 
-          <Button className='btn1' onClick={bookNow}>Book Now</Button>
+         <div>
+         <p>Total Hours : {totalHours}</p>
+         <p>Rent Per Hour : <b>{car.rentPerHour}</b></p>
+         <Checkbox onChange={(e)=>{
+           if(e.target.checked){
+             setDriver(true);
+           }else{ 
+             setDriver(false);
+           }
+         }}>Driver Required</Checkbox>
+         <p><b>Total Amount : {totalAmount}</b></p>
 
-        </div>
+        
+
+         <StripeCheckout
+        token={onToken}
+        shippingAddress
+        amount={totalAmount * 100}
+        currency={'lkr'}
+        stripeKey="pk_test_51LaAqqBTVpVrUagONSn2UhO6A5ZLkkNfdn0GeJgV76QceDPF491k3Y0Kg9gpWHsVWIoJQpqv1HlZrvcR6C5TMyzH006EsaFJJX">
+
+         <Button className='btn1'>Book Now</Button>
+
+      </StripeCheckout>
+       </div>
+
+       )}
         </div>
       </Col>
+
+{car.name &&(
+  <Modal
+  title="Booked time slots"
+  centered
+  visible={modal2Open}
+  onOk ={() => setModal2Open(false)}
+  onCancel={() => setModal2Open(false)}
+
+>
+  <div>
+  {car.bookedTimeSlots.map(slot =>{
+    return <button>{slot.from} - {slot.to}</button>
+  })}  
+  </div>
+ 
+</Modal>
+      )}
+
     </Row>
+
 
     </DefaultLayout>
   )
