@@ -12,4 +12,47 @@ router.get('/getallcars', async(req,res) =>{
     }
 });
 
+router.post('/addCar', async (req,res) => {
+    try{
+        const newcar = new Car(req.body)
+        await newcar.save()
+        res.send('car added successfully')
+    }
+    catch(error){
+        return res.status(400).json(error);
+
+    }
+})
+
+router.post('/editCar', async (req,res) => {
+    try{
+        const car = await Car.findOne({_id : req.body._id})
+        car.name = req.body.name
+        car.image = req.body.image
+        car.fuel = req.body.fuel
+        car.rentPerHour = req.body.rentPerHour
+        car.capacity = req.body.capacity
+
+        await car.save()
+
+        res.send('Car details updated successfully')
+    }
+    catch(error){
+        return res.status(400).json(error);
+
+    }
+})
+
+router.post('/deletecar', async (req,res) => {
+    try{
+       await Car.findOneAndRemove({_id : req.body.carid})
+     
+        res.send('Car deleted successfully')
+    }
+    catch(error){
+        return res.status(400).json(error);
+
+    }
+})
+
 module.exports = router;

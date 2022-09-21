@@ -8,6 +8,11 @@ import { Spinner } from '../components/Spinner';
 import { bookCar } from '../redux/actions/bookingActions';
 import { getAllCars } from '../redux/actions/carsAction';
 import StripeCheckout from 'react-stripe-checkout';
+import AOS from 'aos';
+
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const { RangePicker } = DatePicker;
 export const BookingCar = () => {
@@ -22,6 +27,7 @@ export const BookingCar = () => {
   const [driver,setDriver] = useState(false);
   const [totalAmount,setTotalAmount] = useState(0);
   const [modal2Open, setModal2Open] = useState(false);
+
 
   useEffect(() => {
    
@@ -80,8 +86,11 @@ function onToken(token){
 
     {loading && (<Spinner/>)}
     <Row justify='center' className='d-flex align-items-center' style={{minHeight : '90vh'}}>
-      <Col lg={10} sm={24} xs={24}>
-      <img src={car.image} className='carImg2 bs1'/>
+      <Col lg={10} sm={24} xs={24} className='p-3'>
+      <img
+      data-aos='zoom-in'
+      data-aos-duration='3000'
+      src={car.image} className='carImg2 bs1 w-100 '/>
       </Col>
 
       <Col lg={10} sm={24} xs={24}>
@@ -143,7 +152,7 @@ function onToken(token){
 >
   <div>
   {car.bookedTimeSlots.map(slot =>{
-    return <button>{slot.from} - {slot.to}</button>
+    return <button style={{backgroundColor:'white',borderColor:'orangered'}}>{slot.from} - {slot.to}</button>
   })}  
   </div>
  

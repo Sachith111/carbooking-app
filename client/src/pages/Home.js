@@ -71,12 +71,12 @@ export const Home = () => {
       <Row justify='center' gutter={16} >
         {totalCars.map(car=> {
           return <Col lg={5} sm={24} xs={24}>
-            <div className='car p-2 bs1'>
+            <div className='car p-2 bs1'> 
               <img src={car.image} className='carImg'/>
               <div className='car-content d-flex align-item-center justify-content-between pt-3'>
-                <div>
+                <div className='text-left pl-2'>
                   <p style={{textTrasform:'uppercase'}}>{car.name}</p>
-                  <p>{car.rentPerHour} Rent per hour /-</p>
+                  <p> Rent per hour : {car.rentPerHour} /-</p>
                 </div>
                 <div>
                   <button className='btn1 mr-1'><Link to={`/booking/${car._id}`}>Book Now</Link></button>

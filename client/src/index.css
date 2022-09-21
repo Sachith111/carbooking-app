@@ -5,7 +5,7 @@ body {
   font-family: 'Montserrat', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: azure;
+  background-color: azure !important;
 
 }
 
@@ -47,6 +47,8 @@ p{
  
 .header{
   padding: 20px;
+  background-color: white;
+
 }
 
 .header .ant-btn{
@@ -60,6 +62,12 @@ p{
 
 .content{
   min-height: 90vh;
+}
+
+.footer{
+  background-color: #8eb0bc;
+  padding: 30px;
+  margin-top: 20px;
 }
 
 .carImg{
@@ -132,5 +140,14 @@ p{
 .carImg2{
   height: 400px;
   border-radius: 10px;
-  width: 600px;
+  /* width: 600px; */
+}
+
+svg{
+  height: 20px !important;
+  width: 20px !important;
+}
+
+a{
+  color: orangered !important;
 }
