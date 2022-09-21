@@ -1,8 +1,14 @@
 import React from 'react'
-import { Button, Dropdown, Menu, Row, Col } from 'antd';
+import { Button, Dropdown, Menu, Row, Col,Tag } from 'antd';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {Link} from 'react-router-dom';
+import {
+  FacebookOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+  YoutubeOutlined,
+} from '@ant-design/icons';
 
 AOS.init();
 export const DefaultLayout = (props) => {
@@ -60,6 +66,20 @@ export const DefaultLayout = (props) => {
         <Row justify='center'>
         <Col lg={20} sm={24} className='d-flex justify-content-between' >
         <div> <p>Copyright @2022 All rights reserved</p></div>
+        <div>
+        <Tag icon={<TwitterOutlined />} color="#55acee">
+          Twitter
+        </Tag>
+        <Tag icon={<YoutubeOutlined />} color="#cd201f">
+          Youtube
+        </Tag>
+        <Tag icon={<FacebookOutlined />} color="#3b5999">
+          Facebook
+        </Tag>
+        <Tag icon={<LinkedinOutlined />} color="#55acee">
+          LinkedIn
+        </Tag>
+        </div>
           <div> <p>Designed and Developed by AMS 🧡</p></div>
         
         </Col>
