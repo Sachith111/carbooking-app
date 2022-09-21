@@ -56,9 +56,15 @@ export const DefaultLayout = (props) => {
         <div className='content'>
           {props.children}
         </div>
-        <div className='footer text-center'>
-            <p>Designed and Developed by</p>
-            <p>AMS</p>
+        <div className='footer'>
+        <Row justify='center'>
+        <Col lg={20} sm={24} className='d-flex justify-content-between' >
+        <div> <p>Copyright @2022 All rights reserved</p></div>
+          <div> <p>Designed and Developed by AMS 🧡</p></div>
+        
+        </Col>
+      </Row>
+ 
         </div>
     </div>
   )

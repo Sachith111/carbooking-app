@@ -68,6 +68,8 @@ p{
   background-color: #8eb0bc;
   padding: 30px;
   margin-top: 20px;
+  justify-content: space-between;
+  flex:display;
 }
 
 .carImg{
